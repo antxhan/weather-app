@@ -8,7 +8,9 @@
     Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   /* FONT SIZES */
-  --fs-xlarge: 3rem;
+  --fs-xlarge: 2rem;
+  --fs-large: 1.5rem;
+  --fs-normal: 1rem;
 }
 
 *,
@@ -22,6 +24,7 @@
 html {
   color-scheme: dark;
 }
+
 body {
   /* background-color: red; */
   display: flex;
@@ -29,6 +32,58 @@ body {
   min-height: 100vh;
   font-family: var(--ff-sans-serif);
 }
+
+/* HEADER --------------------------------------------------------------------------- */
+
+header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 1rem;
+  align-items: center;
+}
+
+h1 {
+  font-size: var(--fs-large);
+}
+
+form {
+  place-self: center;
+  display: flex;
+  width: min(100%, 300px);
+  position: relative;
+  color: var(--clr-neutral-200);
+  & svg {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%);
+    width: 1.25rem;
+    height: auto;
+    color: inherit;
+  }
+  & input {
+    border-radius: 100vw;
+    background: none;
+    border: 1px solid var(--clr-neutral-200);
+    width: 100%;
+    padding: 0.5rem 1rem;
+    padding-left: 2rem;
+    outline: none;
+    font-size: var(--fs-normal);
+    &::placeholder {
+      color: var(--clr-neutral-200);
+    }
+  }
+  &:hover,
+  &:focus-within {
+    color: var(--clr-neutral-000);
+    & input {
+      border-color: var(--clr-neutral-000);
+    }
+  }
+}
+
+/* MAIN --------------------------------------------------------------------------- */
 
 main {
   display: flex;
@@ -38,47 +93,15 @@ main {
   flex-grow: 1;
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  width: min(100%, 400px);
-  p {
-    color: var(--clr-neutral-200);
-  }
-  input[type="text"],
-  .location-input {
-    text-align: center;
-    /* width: 100%; */
-    /* display: flex; */
-    max-width: 70vw;
-    outline: 2px solid red;
-    background: none;
-    border: none;
-    font-size: var(--fs-xlarge);
-    /* outline: none; */
-    &::placeholder {
-      color: var(--clr-neutral-200);
-    }
-    &.placeholder-show {
-      &::before {
-        content: "Location";
-        width: 100%;
-        height: auto;
-        visibility: visible;
-        color: var(--clr-neutral-200);
-      }
-    }
-  }
-}
+/* FOOTER --------------------------------------------------------------------------- */
 
 footer {
-  position: fixed;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
+  /* position: fixed; */
+  /* bottom: 0; */
+  /* left: 50%; */
+  /* transform: translateX(-50%); */
+  display: flex;
+  justify-content: center;
   padding: 1rem;
   color: var(--clr-neutral-100);
   a {

@@ -1,8 +1,6 @@
 import "./styles.css";
 import { debounce } from "./utils";
 
-const INPUT_PLACEHOLDER = "Location";
-
 class API {
   constructor() {
     this.baseUrl =
@@ -20,17 +18,38 @@ class API {
     )}`;
     const data = await fetch(url);
     const response = await data.json();
-    console.log(response);
+    // console.log(response);
     return response;
   }
 }
 
 class View {
   constructor() {}
-  render(data) {}
+  render(data) {
+    if (data) {
+      console.log("from render", data);
+      this.renderLocationInput(data.resolvedAddress);
+    }
+  }
+  renderLocationInput(placeholder = "Enter Location") {
+    const locationInput = document.getElementById("location");
+    if (locationInput) {
+      locationInput.remove();
+    }
+
+    const html = `
+    <input 
+      type="text" 
+      name="location" 
+      id="location" 
+      placeholder="${placeholder}"
+    />
+    `;
+    document.querySelector("form").insertAdjacentHTML("beforeend", html);
+  }
   bindLocationInput(handler) {
     const input = document.getElementById("location");
-    input.addEventListener("input", debounce(handler, 500));
+    input.addEventListener("input", debounce(handler, 1000));
   }
 }
 
@@ -38,15 +57,20 @@ class Controller {
   constructor(api, view) {
     this.api = api;
     this.view = view;
-    this.location = undefined;
-    this.updateView();
+    this.updateView(null);
   }
   updateView(data) {
     this.view.render(data);
     this.view.bindLocationInput(this.handleLocationInput.bind(this));
   }
-  handleLocationInput(e) {
-    console.log(e.target.value);
+  async handleLocationInput(e) {
+    const locationInputValue = e.target.value;
+    if (!locationInputValue) {
+      return;
+    }
+    console.log("from controller", locationInputValue);
+    // const data = await this.api.getData(locationInputValue);
+    // this.updateView(data);
   }
 }
 
