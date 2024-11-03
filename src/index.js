@@ -167,9 +167,6 @@ class Controller {
     if (!locationInputValue) {
       return;
     }
-
-    // await fakeAPIRequst();
-    // console.log("from controller", locationInputValue);
     const data = await this.api.getData(locationInputValue);
     this.updateView(data);
   }

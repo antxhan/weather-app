@@ -55,13 +55,16 @@ header {
   grid-template-columns: repeat(3, 1fr);
   padding: 1rem;
   align-items: center;
+  gap: 1rem;
 }
 
-h1 {
+.logo {
   font-size: var(--fs-large);
+  font-weight: bold;
 }
 
 form {
+  grid-column: 2;
   place-self: center;
   display: flex;
   width: min(100%, 300px);
@@ -125,5 +128,19 @@ footer {
     &:hover {
       color: var(--clr-neutral-000);
     }
+  }
+}
+
+/* MEDIA QUERIES --------------------------------------------------------------------------- */
+
+@media (max-width: 550px) {
+  header {
+    grid-template-columns: 3rem 1fr 3rem;
+  }
+  .logo {
+    display: none;
+  }
+  form {
+    width: 100%;
   }
 }
