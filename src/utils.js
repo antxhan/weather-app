@@ -7,3 +7,12 @@ export function debounce(callback, delay) {
     }, delay);
   };
 }
+
+export function fakeAPIRequst() {
+  const fakeData = "fake data";
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(fakeData);
+    }, 2000);
+  });
+}
