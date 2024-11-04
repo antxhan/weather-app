@@ -68,6 +68,14 @@ header {
   font-weight: bold;
 }
 
+/* header > form {
+  display: none;
+} */
+
+main > .container {
+  display: none;
+}
+
 form {
   grid-column: 2;
   place-self: center;
