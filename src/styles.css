@@ -224,6 +224,7 @@ main {
   left: calc(50% - var(--border-width) / 2);
   transform-origin: bottom;
   transform: rotate(var(--arm-rotation));
+  transition: transform 0.5s ease-in-out;
 }
 
 .clock__arm--minute {
