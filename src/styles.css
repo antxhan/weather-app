@@ -113,23 +113,36 @@ main {
   flex-grow: 1;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.main__location {
+  text-align: center;
+}
+
+.main__temperature {
+  text-align: center;
+}
+
+.main__description {
+  text-align: center;
+}
+
 /* CLOCK --------------------------------------------------------------------------- */
 
 .clock {
+  --width: 250px;
+  margin: var(--border-width);
   outline: var(--border-width) solid white;
-  width: 300px;
-  height: 300px;
+  width: var(--width);
+  height: var(--width);
   border-radius: 50%;
   position: relative;
-
-  &::before {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    content: "";
-    border-radius: inherit;
-    outline: var(--border-width) solid var(--clr-neutral-000);
-  }
 }
 
 .clock__hours {
@@ -226,7 +239,7 @@ main {
   transform: rotate(var(--rotate));
   background: none;
   & div {
-    --icon-width: 3rem;
+    --icon-width: calc(var(--width) * 0.2);
     border-radius: 50%;
     width: var(--icon-width);
     height: var(--icon-width);
