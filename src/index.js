@@ -18,6 +18,24 @@ import thunderShowersDay from "./assets/images/thunder-showers-day.jpg";
 import thunderShowersNight from "./assets/images/thunder-showers-night.jpg";
 import wind from "./assets/images/wind.jpg";
 
+import clearDayLow from "./assets/images_lowres/clear-day-transformed.jpeg";
+import clearNightLow from "./assets/images_lowres/clear-night-transformed.jpeg";
+import cloudyLow from "./assets/images_lowres/cloudy-transformed.jpeg";
+import fogDayLow from "./assets/images_lowres/fog-day-transformed.jpeg";
+import fogNightLow from "./assets/images_lowres/fog-night-transformed.jpeg";
+import partlyCloudyDayLow from "./assets/images_lowres/partly-cloudy-day-transformed.jpeg";
+import partlyCloudyNightLow from "./assets/images_lowres/partly-cloudy-night-transformed.jpeg";
+import rainLow from "./assets/images_lowres/rain-transformed.jpeg";
+import showersDayLow from "./assets/images_lowres/showers-day-transformed.jpeg";
+import showersNightLow from "./assets/images_lowres/showers-night-transformed.jpeg";
+import snowShowersDayLow from "./assets/images_lowres/snow-showers-day-transformed.jpeg";
+import snowShowersNightLow from "./assets/images_lowres/snow-showers-night-transformed.jpeg";
+import snowLow from "./assets/images_lowres/snow-transformed.jpeg";
+import thunderRainLow from "./assets/images_lowres/thunder-rain-transformed.jpeg";
+import thunderShowersDayLow from "./assets/images_lowres/thunder-showers-day-transformed.jpeg";
+import thunderShowersNightLow from "./assets/images_lowres/thunder-showers-night-transformed.jpeg";
+import windLow from "./assets/images_lowres/wind-transformed.jpeg";
+
 class API {
   constructor() {
     this.baseUrl =
@@ -126,7 +144,7 @@ class View {
     `;
     document.querySelector("header").insertAdjacentHTML("beforeend", html);
   }
-  renderBackgroundImage(data) {
+  renderBackgroundImage1(data) {
     const bgImg = document.getElementById("bg-img");
     if (data) {
       // bgImg.src = `assets/images/${data.currentConditions.icon}.jpg`;
@@ -208,6 +226,112 @@ class View {
       bgImg.src = clearDay;
     }
   }
+  renderBackgroundImage(data) {
+    let bgImg;
+    let bgImgLow;
+    if (!data) {
+      // console.log("tets");
+      bgImg = clearDay;
+      bgImgLow = clearDayLow;
+      return;
+    }
+    switch (data.currentConditions.icon) {
+      case "clear-day": {
+        bgImg = clearDay;
+        bgImgLow = clearDayLow;
+        break;
+      }
+      case "clear-night": {
+        bgImg = clearNight;
+        bgImgLow = clearNightLow;
+        break;
+      }
+      case "cloudy": {
+        bgImg = cloudy;
+        bgImgLow = cloudyLow;
+        break;
+      }
+      case "fog": {
+        // TODO: make it determine if it's night or day
+        bgImg = fogDay || fogNight;
+        bgImgLow = fogDayLow || fogNightLow;
+        break;
+      }
+      case "partly-cloudy-day": {
+        bgImg = partlyCloudyDay;
+        bgImgLow = partlyCloudyDayLow;
+        break;
+      }
+      case "partly-cloudy-night": {
+        bgImg = partlyCloudyNight;
+        bgImgLow = partlyCloudyNightLow;
+        break;
+      }
+      case "rain": {
+        bgImg = rain;
+        bgImgLow = rainLow;
+        break;
+      }
+      case "showers-day": {
+        bgImg = showersDay;
+        bgImgLow = showersDayLow;
+        break;
+      }
+      case "showers-night": {
+        bgImg = showersNight;
+        bgImgLow = showersNightLow;
+        break;
+      }
+      case "snow": {
+        bgImg = snow;
+        bgImgLow = snowLow;
+        break;
+      }
+      case "snow-showers-day": {
+        bgImg = snowShowersDay;
+        bgImgLow = snowShowersDayLow;
+        break;
+      }
+      case "snow-showers-night": {
+        bgImg = snowShowersNight;
+        bgImgLow = snowShowersNightLow;
+        break;
+      }
+      case "thunder-rain": {
+        bgImg = thunderRain;
+        bgImgLow = thunderRainLow;
+        break;
+      }
+      case "thunder-showers-day": {
+        bgImg = thunderShowersDay;
+        bgImgLow = thunderShowersDayLow;
+        break;
+      }
+      case "thunder-showers-night": {
+        bgImg = thunderShowersNight;
+        bgImgLow = thunderShowersNightLow;
+        break;
+      }
+      case "wind": {
+        bgImg = wind;
+        bgImgLow = windLow;
+        break;
+      }
+      default: {
+        bgImg = clearDay;
+        bgImgLow = clearDayLow;
+        break;
+      }
+    }
+    const body = document.querySelector("body");
+    body.style.backgroundImage = `url(${bgImgLow})`;
+
+    const img = new Image();
+    img.src = bgImg;
+    img.onload = () => {
+      body.style.backgroundImage = `url(${bgImg})`;
+    };
+  }
   renderClock(data) {
     const clock = document.querySelector(".clock");
     if (!data) {
@@ -284,3 +408,10 @@ class Controller {
 const api = new API();
 const view = new View();
 const controller = new Controller(api, view);
+
+document.querySelector("body").style.backgroundImage = `url(${clearDayLow})`;
+const img = new Image();
+img.src = clearDay;
+img.onload = () => {
+  document.querySelector("body").style.backgroundImage = `url(${clearDayLow})`;
+};

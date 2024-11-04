@@ -31,12 +31,15 @@ html {
 }
 
 body {
-  /* background-color: red; */
+  background-color: rgb(30, 179, 238);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
   /* height: 100%; */
   font-family: var(--ff-sans-serif);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 img {
@@ -67,10 +70,6 @@ header {
   font-size: var(--fs-large);
   font-weight: bold;
 }
-
-/* header > form {
-  display: none;
-} */
 
 main > .container {
   display: none;
@@ -133,7 +132,6 @@ main {
   gap: 1rem;
   backdrop-filter: blur(10px);
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
-  /* background-color: rgb(0, 0, 0, 0.05); */
   padding: 2rem;
   border-radius: 1rem;
   &::before {
@@ -145,11 +143,6 @@ main {
     height: 100%;
     border: 1px solid var(--border-color);
     border-radius: inherit;
-    /* mix-blend-mode: multiply; */
-    /* background-color: red; */
-    /* background-color: rgba(0, 0, 0, 0.5); */
-    /* backdrop-filter: blur(10px); */
-    /* z-index: -1; */
   }
 }
 
