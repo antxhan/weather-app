@@ -45,8 +45,8 @@ class View {
   render(data) {
     this.renderLocationInput();
     this.renderBackgroundImage(data);
+    this.renderClock(data);
     if (data) {
-      this.renderClock(data);
       console.log("from render", data);
     }
   }
@@ -148,6 +148,14 @@ class View {
     }
   }
   renderClock(data) {
+    const clock = document.querySelector(".clock");
+    if (!data) {
+      clock.style.display = "none";
+      return;
+    } else {
+      clock.style.display = "block";
+    }
+
     function setSunriseAndSunset(element, hours, minutes) {
       element.style.setProperty(
         "--rotate",
