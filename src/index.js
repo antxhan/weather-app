@@ -41,13 +41,32 @@ class API {
 }
 
 class View {
-  constructor() {}
+  constructor() {
+    this.location = "";
+  }
   render(data) {
     this.renderLocationInput();
+    this.renderLocation(data);
     this.renderBackgroundImage(data);
     this.renderClock(data);
     if (data) {
       console.log("from render", data);
+    }
+  }
+  renderLocation(data) {
+    const locationContainer = document.querySelector(".main__location");
+    if (data) {
+      const resolvedAddress = data.resolvedAddress;
+      let title = resolvedAddress.split(",")[0];
+      let subtitle;
+      if (resolvedAddress.split(",").length > 1) {
+        let [title, ...rest] = resolvedAddress.split(",");
+        subtitle = rest.join(", ");
+      }
+      locationContainer.innerHTML = `
+        <h1>${title}</h1>
+        ${subtitle ?? `<p>${subtitle}</p>`} 
+      `;
     }
   }
   renderLocationInput() {
@@ -61,6 +80,7 @@ class View {
       name="location" 
       id="location" 
       placeholder="Enter Location"
+      value="${this.location}"
     />
     `;
     document.querySelector("form").insertAdjacentHTML("beforeend", html);
@@ -214,6 +234,7 @@ class Controller {
       return;
     }
     const data = await this.api.getData(locationInputValue);
+    this.view.location = e.target.value;
     this.updateView(data);
   }
 }
