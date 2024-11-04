@@ -47,6 +47,8 @@ class View {
   render(data) {
     this.renderLocationInput();
     this.renderLocation(data);
+    this.renderTemperatue(data);
+    this.renderDescription(data);
     this.renderBackgroundImage(data);
     this.renderClock(data);
     if (data) {
@@ -66,6 +68,23 @@ class View {
       locationContainer.innerHTML = `
         <h1>${title}</h1>
         ${subtitle ?? `<p>${subtitle}</p>`} 
+      `;
+    }
+  }
+  renderTemperatue(data) {
+    const temperatureContainer = document.querySelector(".main__temperature");
+    if (data) {
+      temperatureContainer.innerHTML = `
+        <h2>${data.currentConditions.temp}°C</h2>
+        <p>Feels like: ${data.currentConditions.feelslike}°C</p>
+      `;
+    }
+  }
+  renderDescription(data) {
+    const descriptionContainer = document.querySelector(".main__description");
+    if (data) {
+      descriptionContainer.innerHTML = `
+        <p>${data.currentConditions.conditions}</p>
       `;
     }
   }
