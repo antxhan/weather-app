@@ -157,12 +157,16 @@ class View {
 
     // sunrise
     const sunriseElement = document.querySelector(".clock__arm--sunrise");
+    sunriseElement.querySelector(".tooltip").innerText =
+      data.currentConditions.sunrise.slice(0, 5);
     const sunriseHours = data.currentConditions.sunrise.split(":")[0];
     const sunriseMinutes = data.currentConditions.sunrise.split(":")[1];
     setSunriseAndSunset(sunriseElement, sunriseHours, sunriseMinutes);
 
     // sunset
     const sunsetElement = document.querySelector(".clock__arm--sunset");
+    sunsetElement.querySelector(".tooltip").innerText =
+      data.currentConditions.sunset.slice(0, 5);
     const sunsetHours = data.currentConditions.sunset.split(":")[0];
     const sunsetMinutes = data.currentConditions.sunset.split(":")[1];
     setSunriseAndSunset(sunsetElement, sunsetHours, sunsetMinutes);

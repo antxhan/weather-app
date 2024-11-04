@@ -2,6 +2,7 @@
   --clr-neutral-000: #fff;
   --clr-neutral-100: #eeeeee;
   --clr-neutral-200: #b9b9b9;
+  --clr-neutral-800: #262626;
 
   /* FONT FAMILIES */
   --ff-sans-serif: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -11,6 +12,7 @@
   --fs-xlarge: 2rem;
   --fs-large: 1.5rem;
   --fs-normal: 1rem;
+  --fs-small: 0.875rem;
 
   --border-width: 6px;
 }
@@ -227,9 +229,6 @@ main {
   transition: transform 0.5s ease-in-out;
 }
 
-.clock__arm--minute {
-}
-
 .clock__arm--hour {
   --arm-gap: 4rem;
 }
@@ -255,16 +254,34 @@ main {
 }
 
 .clock__arm--sunrise {
-  --rotate: 30deg;
   & div {
     background-color: rgb(231, 158, 13);
   }
 }
 
 .clock__arm--sunset {
-  --rotate: 80deg;
   & div {
     background-color: rgb(32, 69, 204);
+  }
+}
+
+.clock__sunrise,
+.clock__sunset {
+  position: relative;
+  span {
+    opacity: 0;
+    position: absolute;
+    top: -2.25rem;
+    background-color: var(--clr-neutral-800);
+    padding: 0.33rem;
+    border-radius: 0.5rem;
+    font-size: var(--fs-small);
+    transition: opacity 0.2s ease-in-out;
+  }
+  &:hover {
+    span {
+      opacity: 1;
+    }
   }
 }
 
