@@ -200,8 +200,8 @@ main {
 }
 
 .clock__arm {
-  --arm-gap: 1rem;
-  /* --arm-width: 0.5rem; */
+  --arm-gap: 2rem;
+  --arm-rotation: 0deg;
   height: calc(50% - var(--arm-gap));
   border-radius: 100vw;
   margin-top: var(--arm-gap);
@@ -210,16 +210,14 @@ main {
   position: absolute;
   left: calc(50% - var(--border-width) / 2);
   transform-origin: bottom;
+  transform: rotate(var(--arm-rotation));
 }
 
 .clock__arm--minute {
-  transform: rotate(25deg);
 }
 
 .clock__arm--hour {
-  --arm-gap: 3rem;
-  transform: rotate(135deg);
-  /* background-color: blue; */
+  --arm-gap: 4rem;
 }
 
 .clock__arm--sunrise,
@@ -243,7 +241,7 @@ main {
 }
 
 .clock__arm--sunrise {
-  --rotate: 225deg;
+  --rotate: 30deg;
   & div {
     background-color: rgb(231, 158, 13);
   }

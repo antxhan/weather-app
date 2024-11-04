@@ -46,6 +46,7 @@ class View {
     this.renderLocationInput();
     this.renderBackgroundImage(data);
     if (data) {
+      this.renderClock(data);
       console.log("from render", data);
     }
   }
@@ -145,6 +146,39 @@ class View {
     } else {
       bgImg.src = clearDay;
     }
+  }
+  renderClock(data) {
+    function setSunriseAndSunset(element, hours, minutes) {
+      element.style.setProperty(
+        "--rotate",
+        `${hours * 30 + (minutes / 60) * 30}deg`
+      );
+    }
+
+    // sunrise
+    const sunriseElement = document.querySelector(".clock__arm--sunrise");
+    const sunriseHours = data.currentConditions.sunrise.split(":")[0];
+    const sunriseMinutes = data.currentConditions.sunrise.split(":")[1];
+    setSunriseAndSunset(sunriseElement, sunriseHours, sunriseMinutes);
+
+    // sunset
+    const sunsetElement = document.querySelector(".clock__arm--sunset");
+    const sunsetHours = data.currentConditions.sunset.split(":")[0];
+    const sunsetMinutes = data.currentConditions.sunset.split(":")[1];
+    setSunriseAndSunset(sunsetElement, sunsetHours, sunsetMinutes);
+
+    const localTimeUnix = Date.now() + data.tzoffset * 3600 * 1000;
+    const localTime = new Date(localTimeUnix);
+    console.log(localTime.getHours(), localTime.getMinutes());
+
+    // arms
+    document
+      .querySelector(".clock__arm--minute")
+      .style.setProperty("--arm-rotation", `${localTime.getMinutes() * 6}deg`);
+
+    document
+      .querySelector(".clock__arm--hour")
+      .style.setProperty("--arm-rotation", `${localTime.getHours() * 30}deg`);
   }
   bindLocationInput(handler) {
     const input = document.getElementById("location");
