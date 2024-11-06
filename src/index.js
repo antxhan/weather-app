@@ -70,7 +70,6 @@ class View {
       this.renderBackgroundImage(data);
       this.renderClock(data);
       this.renderContainer();
-      console.log("from render", data);
     }
   }
   renderContainer() {
@@ -78,7 +77,7 @@ class View {
     container.style.display = "flex";
   }
   renderLocation(data) {
-    const locationContainer = document.querySelector(".main__location");
+    const locationContainer = document.querySelector(".container__location");
     if (data) {
       const resolvedAddress = data.resolvedAddress;
       let title = resolvedAddress.split(",")[0];
@@ -94,7 +93,9 @@ class View {
     }
   }
   renderTemperatue(data) {
-    const temperatureContainer = document.querySelector(".main__temperature");
+    const temperatureContainer = document.querySelector(
+      ".container__temperature"
+    );
     if (data) {
       temperatureContainer.innerHTML = `
         <h2>${data.currentConditions.temp}°C</h2>
@@ -103,7 +104,9 @@ class View {
     }
   }
   renderDescription(data) {
-    const descriptionContainer = document.querySelector(".main__description");
+    const descriptionContainer = document.querySelector(
+      ".container__description"
+    );
     if (data) {
       descriptionContainer.innerHTML = `
         <p>${data.currentConditions.conditions}</p>
@@ -111,10 +114,7 @@ class View {
     }
   }
   renderLocationInput() {
-    const locationForm = document.querySelector("form");
-    if (locationForm) {
-      locationForm.remove();
-    }
+    let locationForm = document.querySelector("form");
     const html = `
     <form>
     <svg
@@ -142,7 +142,8 @@ class View {
     />
     </form>
     `;
-    document.querySelector("header").insertAdjacentHTML("beforeend", html);
+    // document.querySelector("body").insertAdjacentHTML("beforeend", html);
+    locationForm.classList.add("header");
   }
   renderBackgroundImage1(data) {
     const bgImg = document.getElementById("bg-img");
@@ -379,6 +380,7 @@ class View {
   }
   bindLocationInput(handler) {
     const input = document.getElementById("location");
+    input.removeEventListener("input", handler);
     input.addEventListener("input", debounce(handler, 1000));
   }
 }

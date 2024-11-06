@@ -75,14 +75,19 @@ main > .container {
   display: none;
 }
 
+form.header {
+  top: 2rem;
+  transition: top 0.5s ease-in-out;
+}
+
 form {
-  grid-column: 2;
-  place-self: center;
   display: flex;
   width: min(100%, 300px);
-  position: relative;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.025);
-  /* color: var(--clr-neutral-200); */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: top 0.5s ease-in-out;
   & svg {
     position: absolute;
     top: 50%;
@@ -146,21 +151,21 @@ main {
   }
 }
 
-.main__location {
+.container__location {
   text-align: center;
 }
 
-.main__temperature {
+.container__temperature {
   text-align: center;
 }
 
-.main__description {
+.container__description {
   text-align: center;
 }
 
 /* CLOCK --------------------------------------------------------------------------- */
 
-.clock {
+.container__clock {
   --width: 250px;
   margin: var(--border-width);
   outline: var(--border-width) solid white;
