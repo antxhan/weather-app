@@ -63,13 +63,13 @@ class View {
   }
   render(data) {
     this.renderLocationInput();
-    this.renderLocation(data);
-    this.renderTemperatue(data);
-    this.renderDescription(data);
-    this.renderBackgroundImage(data);
-    this.renderClock(data);
-    this.renderContainer();
     if (data) {
+      this.renderLocation(data);
+      this.renderTemperatue(data);
+      this.renderDescription(data);
+      this.renderBackgroundImage(data);
+      this.renderClock(data);
+      this.renderContainer();
       console.log("from render", data);
     }
   }
@@ -387,7 +387,6 @@ class Controller {
   constructor(api, view) {
     this.api = api;
     this.view = view;
-    // this.updateView(null);
     this.view.bindLocationInput(this.handleLocationInput.bind(this));
   }
   updateView(data) {
