@@ -74,7 +74,6 @@ class View {
   }
   renderContainer() {
     const container = document.querySelector(".container");
-    // container.style.display = "flex";
     container.classList.add("container--visible");
   }
   renderLocation(data) {
