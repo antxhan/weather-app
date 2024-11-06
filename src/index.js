@@ -381,7 +381,12 @@ class View {
   bindLocationInput(handler) {
     const input = document.getElementById("location");
     input.removeEventListener("input", handler);
-    input.addEventListener("input", debounce(handler, 1000));
+    input.addEventListener("input", debounce(handler, 500));
+  }
+  bindFormSubmit(handler) {
+    const form = document.querySelector("form");
+    form.removeEventListener("submit", handler);
+    form.addEventListener("submit", handler);
   }
 }
 
@@ -390,6 +395,7 @@ class Controller {
     this.api = api;
     this.view = view;
     this.view.bindLocationInput(this.handleLocationInput.bind(this));
+    this.view.bindFormSubmit(this.handleFormSubmit.bind(this));
   }
   updateView(data) {
     this.view.render(data);
@@ -403,6 +409,9 @@ class Controller {
     const data = await this.api.getData(locationInputValue);
     this.view.location = e.target.value;
     this.updateView(data);
+  }
+  handleFormSubmit(e) {
+    e.preventDefault();
   }
 }
 
