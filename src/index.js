@@ -74,7 +74,8 @@ class View {
   }
   renderContainer() {
     const container = document.querySelector(".container");
-    container.style.display = "flex";
+    // container.style.display = "flex";
+    container.classList.add("container--visible");
   }
   renderLocation(data) {
     const locationContainer = document.querySelector(".container__location");
@@ -334,7 +335,7 @@ class View {
     };
   }
   renderClock(data) {
-    const clock = document.querySelector(".clock");
+    const clock = document.querySelector(".container__clock");
     if (!data) {
       clock.style.display = "none";
       return;

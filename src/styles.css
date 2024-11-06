@@ -71,10 +71,6 @@ header {
   font-weight: bold;
 }
 
-main > .container {
-  display: none;
-}
-
 form.header {
   top: 2rem;
   transition: top 0.5s ease-in-out;
@@ -139,6 +135,8 @@ main {
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.05);
   padding: 2rem;
   border-radius: 1rem;
+  opacity: 0;
+  z-index: -1;
   &::before {
     content: "";
     position: absolute;
@@ -149,6 +147,13 @@ main {
     border: 1px solid var(--border-color);
     border-radius: inherit;
   }
+}
+
+.container--visible {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+  transition-delay: 500ms;
+  z-index: 2;
 }
 
 .container__location {
@@ -266,6 +271,7 @@ main {
   --arm-gap: 0rem;
   transform: rotate(var(--rotate));
   background: none;
+  /* z-index: 2; */
   & div {
     --icon-width: calc(var(--width) * 0.2);
     border-radius: 50%;
@@ -340,6 +346,7 @@ footer {
     display: none;
   }
   form {
-    width: 100%;
+    --padding: 1rem;
+    width: calc(100% - var(--padding) * 2);
   }
 }
