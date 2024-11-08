@@ -63,22 +63,21 @@ class View {
   }
   render(data) {
     this.renderLocationInput();
-    this.renderLocation(data);
-    this.renderTemperatue(data);
-    this.renderDescription(data);
-    this.renderBackgroundImage(data);
-    this.renderClock(data);
-    this.renderContainer();
     if (data) {
-      console.log("from render", data);
+      this.renderLocation(data);
+      this.renderTemperatue(data);
+      this.renderDescription(data);
+      this.renderBackgroundImage(data);
+      this.renderClock(data);
+      this.renderContainer();
     }
   }
   renderContainer() {
     const container = document.querySelector(".container");
-    container.style.display = "flex";
+    container.classList.add("container--visible");
   }
   renderLocation(data) {
-    const locationContainer = document.querySelector(".main__location");
+    const locationContainer = document.querySelector(".container__location");
     if (data) {
       const resolvedAddress = data.resolvedAddress;
       let title = resolvedAddress.split(",")[0];
@@ -94,7 +93,9 @@ class View {
     }
   }
   renderTemperatue(data) {
-    const temperatureContainer = document.querySelector(".main__temperature");
+    const temperatureContainer = document.querySelector(
+      ".container__temperature"
+    );
     if (data) {
       temperatureContainer.innerHTML = `
         <h2>${data.currentConditions.temp}°C</h2>
@@ -103,7 +104,9 @@ class View {
     }
   }
   renderDescription(data) {
-    const descriptionContainer = document.querySelector(".main__description");
+    const descriptionContainer = document.querySelector(
+      ".container__description"
+    );
     if (data) {
       descriptionContainer.innerHTML = `
         <p>${data.currentConditions.conditions}</p>
@@ -111,10 +114,7 @@ class View {
     }
   }
   renderLocationInput() {
-    const locationForm = document.querySelector("form");
-    if (locationForm) {
-      locationForm.remove();
-    }
+    let locationForm = document.querySelector("form");
     const html = `
     <form>
     <svg
@@ -142,7 +142,8 @@ class View {
     />
     </form>
     `;
-    document.querySelector("header").insertAdjacentHTML("beforeend", html);
+    // document.querySelector("body").insertAdjacentHTML("beforeend", html);
+    locationForm.classList.add("header");
   }
   renderBackgroundImage1(data) {
     const bgImg = document.getElementById("bg-img");
@@ -333,7 +334,7 @@ class View {
     };
   }
   renderClock(data) {
-    const clock = document.querySelector(".clock");
+    const clock = document.querySelector(".container__clock");
     if (!data) {
       clock.style.display = "none";
       return;
@@ -379,7 +380,13 @@ class View {
   }
   bindLocationInput(handler) {
     const input = document.getElementById("location");
-    input.addEventListener("input", debounce(handler, 1000));
+    input.removeEventListener("input", handler);
+    input.addEventListener("input", debounce(handler, 500));
+  }
+  bindFormSubmit(handler) {
+    const form = document.querySelector("form");
+    form.removeEventListener("submit", handler);
+    form.addEventListener("submit", handler);
   }
 }
 
@@ -387,8 +394,8 @@ class Controller {
   constructor(api, view) {
     this.api = api;
     this.view = view;
-    // this.updateView(null);
     this.view.bindLocationInput(this.handleLocationInput.bind(this));
+    this.view.bindFormSubmit(this.handleFormSubmit.bind(this));
   }
   updateView(data) {
     this.view.render(data);
@@ -402,6 +409,9 @@ class Controller {
     const data = await this.api.getData(locationInputValue);
     this.view.location = e.target.value;
     this.updateView(data);
+  }
+  handleFormSubmit(e) {
+    e.preventDefault();
   }
 }
 
